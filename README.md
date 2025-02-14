@@ -88,7 +88,22 @@ telex-log-ingestor/
   }
   ```
 
-### **2. Send Log**  
+### **2. Integration Configuration**  
+**GET /integration.json**  
+- **Description**: Retrieve the integration configuration JSON for the Log Ingestor.  
+- **Response** (Sample):  
+  ```json
+  {
+    "integration": {
+      "name": "Log Ingestor Integration",
+      "description": "A service that ingests application logs and forwards them to Telex for real-time monitoring.",
+      "version": "1.0.0",
+      "author": "Your Name"
+    }
+  }
+  ```
+
+### **3. Send Log**  
 **POST /send-log**  
 - **Description**: Send a log to the Telex webhook.  
 - **Request Body**:  
@@ -116,7 +131,10 @@ telex-log-ingestor/
    curl http://localhost:3000/health
    ```
 
-2. **Submit a Log**  
+2. **Retrieve Integration Configuration**  
+   Visit `http://localhost:3000/integration.json` to fetch the integration configuration.
+
+3. **Submit a Log**  
    Use Postman or `curl` to test the `/send-log` endpoint:  
    ```bash
    curl -X POST http://localhost:3000/send-log \
