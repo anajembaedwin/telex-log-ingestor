@@ -1,0 +1,63 @@
+{
+    "integration": {
+      "name": "Log Ingestor Integration",
+      "description": "A service that ingests application logs and forwards them to Telex for real-time monitoring.",
+      "version": "1.0.0",
+      "author": "Your Name",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/anajembaedwin/telex-log-ingestor.git"
+      },
+      "dependencies": {
+        "express": "^4.17.1",
+        "axios": "^0.21.1",
+        "dotenv": "^8.2.0"
+      },
+      "scripts": {
+        "start": "node src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "engines": {
+        "node": ">=14.0.0"
+      }
+    },
+    "environment": {
+      "PORT": 3000,
+      "TELEX_WEBHOOK_URL": "https://ping.telex.im/v1/webhooks/your-webhook-id"
+    },
+    "endpoints": {
+      "health_check": {
+        "method": "GET",
+        "path": "/health",
+        "description": "Returns the health status of the Log Ingestor service."
+      },
+      "send_log": {
+        "method": "POST",
+        "path": "/send-log",
+        "description": "Endpoint to receive and forward logs to Telex.",
+        "parameters": {
+          "logLevel": {
+            "type": "string",
+            "description": "The severity level of the log (e.g., INFO, WARN, ERROR)."
+          },
+          "message": {
+            "type": "string",
+            "description": "The log message content."
+          }
+        }
+      }
+    },
+    "docker": {
+      "base_image": "node:14",
+      "expose_port": 3000,
+      "commands": [
+        "WORKDIR /app",
+        "COPY package.json .",
+        "RUN npm install",
+        "COPY . .",
+        "CMD [\"npm\", \"start\"]"
+      ]
+    }
+  }
+  
