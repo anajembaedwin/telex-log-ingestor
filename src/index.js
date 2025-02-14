@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
+
 const { sendLogToTelex } = require('./utils');
 
 const app = express();
@@ -8,10 +10,17 @@ const TELELEX_WEBHOOK_URL = process.env.TELEX_WEBHOOK_URL;
 
 app.use(express.json());
 
+// health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Log Ingestor is running' });
 });
 
+// Serve the integration.json file
+app.get('/integration.json', (req, res) => {
+    res.sendFile(path.join(__dirname, '../log-ingestor-config.json'));
+  });
+
+// Endpoint to receive and forward logs to Telex
 app.post('/send-log', async (req, res) => {
   const { logLevel, message } = req.body;
 
