@@ -15,7 +15,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Log Ingestor is running' });
 });
 
-// Serve the integration.json file
+// Endpoint to serve the integration.json file
 app.get('/integration.json', (req, res) => {
     res.sendFile(path.join(__dirname, '../log-ingestor-config.json'));
   });
