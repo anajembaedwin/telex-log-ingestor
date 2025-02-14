@@ -24,7 +24,7 @@
     },
     "environment": {
       "PORT": 3000,
-      "TELEX_WEBHOOK_URL": "https://ping.telex.im/v1/webhooks/your-webhook-id"
+      "TELEX_WEBHOOK_URL": "https://ping.telex.im/v1/webhooks/0194feaf-b1a5-7538-990e-74bae07b656a"
     },
     "endpoints": {
       "health_check": {
